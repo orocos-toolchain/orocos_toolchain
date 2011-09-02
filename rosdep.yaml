@@ -17,10 +17,6 @@ libxslt:
   fedora: libxslt-devel
   ubuntu: libxslt1-dev
   debian: libxslt1-dev
-libxml2:
-  fedora: libxml2-devel
-  ubuntu: libxml2-dev
-  debian: libxml2-dev
 lua-dev:
   ubuntu: liblua5.1-0-dev
   debian: liblua5.1-0-dev
