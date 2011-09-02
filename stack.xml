@@ -8,4 +8,5 @@
   <license>GPL + runtime exception,LGPL</license>  
   <review status="unreviewed" notes=""/>
   <url>http://www.orocos.org/toolchain</url>
+  <depend stack="ros" />
 </stack>
