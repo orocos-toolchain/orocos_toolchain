@@ -3,7 +3,13 @@ libreadline:
   fedora: readline-devel
   debian: libreadline-dev
 omniorb:
-  ubuntu: omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+  ubuntu: 
+    'oneiric': omniorb omniidl omniorb-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '11.04': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '10.10': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '10.04': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '9.10': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '9.04': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
   debian: omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
 gccxml:
   ubuntu: gccxml
@@ -23,6 +29,7 @@ lua-dev:
   fedora: lua-devel
 ruby:
   ubuntu: 
+    'oneiric': ruby1.8-dev libruby1.8 rubygems1.8
     '11.04': ruby1.8-dev libruby1.8 rubygems1.8
     '10.10': ruby1.8-dev libruby1.8 rubygems1.8
     '10.04': ruby1.8-dev libopenssl-ruby1.8 rubygems1.8
