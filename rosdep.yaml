@@ -45,3 +45,7 @@ nokogiri:
   fedora: rubygems libxslt-devel
   ubuntu: rubygems1.8 libxslt1-dev
   debian: rubygems1.8 libxslt1-dev
+facets:
+  ubuntu: rubygems1.8
+  fedora: rubygems
+  debian: rubygems1.8
