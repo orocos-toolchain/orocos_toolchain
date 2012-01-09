@@ -11,6 +11,9 @@ omniorb:
     '9.10': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
     '9.04': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
   debian: omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+  fedora: |
+    #!/bin/bash
+    echo "omniorb is not available in the Fedora package manager - please install it from source";
 gccxml:
   ubuntu: gccxml
   fedora: gccxml
