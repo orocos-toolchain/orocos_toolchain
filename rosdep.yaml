@@ -1,4 +1,4 @@
-libreadline:
+libreadline-dev:
   ubuntu: libreadline-dev
   fedora: readline-devel
   debian: libreadline-dev
