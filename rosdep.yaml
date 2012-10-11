@@ -2,6 +2,10 @@ libreadline-dev:
   ubuntu: libreadline-dev
   fedora: readline-devel
   debian: libreadline-dev
+libncurses-dev:
+  ubuntu: libncurses-dev
+  fedora: ncurses-devel
+  debian: libncurses-dev
 omniorb:
   ubuntu: 
     'oneiric': omniorb omniidl omniorb-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
@@ -40,6 +44,10 @@ ruby:
     '9.04': ruby1.8-dev libopenssl-ruby1.8 rubygems1.8
   fedora: ruby ruby-devel openssl-devel rubygems
   debian: ruby1.8-dev libruby1.8 rubygems1.8
+rake:
+  ubuntu: rake
+  fedora: rake
+  debian: rake
 hoe:
   ubuntu: rubygems1.8
   fedora: rubygems
