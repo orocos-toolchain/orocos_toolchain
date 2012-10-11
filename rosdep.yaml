@@ -3,9 +3,9 @@ libreadline-dev:
   fedora: readline-devel
   debian: libreadline-dev
 libncurses-dev:
-  ubuntu: libncurses-dev
+  ubuntu: libncurses5-dev
   fedora: ncurses-devel
-  debian: libncurses-dev
+  debian: libncurses5-dev
 omniorb:
   ubuntu: 
     'oneiric': omniorb omniidl omniorb-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
