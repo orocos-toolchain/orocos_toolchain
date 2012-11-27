@@ -1,27 +1,27 @@
 [submodule "rtt"]
 	path = rtt
-	url = https://git.gitorious.org/orocos-toolchain/rtt.git
+	url = ../rtt.git
 [submodule "ocl"]
 	path = ocl
-	url = https://git.gitorious.org/orocos-toolchain/ocl.git
+	url = ../ocl.git
 [submodule "orogen"]
 	path = orogen
-	url = https://git.gitorious.org/orocos-toolchain/orogen.git
+	url = ../orogen.git
 [submodule "typelib"]
 	path = typelib
-	url = https://git.gitorious.org/orocos-toolchain/typelib.git
+	url = ../typelib.git
 [submodule "utilmm"]
 	path = utilmm
-	url = https://git.gitorious.org/orocos-toolchain/utilmm.git
+	url = ../utilmm.git
 [submodule "utilrb"]
 	path = utilrb
-	url = https://git.gitorious.org/orocos-toolchain/utilrb.git
+	url = ../utilrb.git
 [submodule "log4cpp"]
 	path = log4cpp
-	url = https://git.gitorious.org/orocos-toolchain/log4cpp.git
+	url = ../log4cpp.git
 [submodule "rtt_typelib"]
 	path = rtt_typelib
-	url = https://git.gitorious.org/orocos-toolchain/rtt_typelib.git
+	url = ../rtt_typelib.git
 [submodule "rtt_gems"]
 	path = rtt_gems
-	url = https://git.gitorious.org/orocos-toolchain/rtt_gems.git
+	url = ../rtt_gems.git
