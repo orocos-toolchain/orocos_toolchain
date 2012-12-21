@@ -22,6 +22,3 @@
 [submodule "rtt_typelib"]
 	path = rtt_typelib
 	url = ../rtt_typelib.git
-[submodule "rtt_gems"]
-	path = rtt_gems
-	url = ../rtt_gems.git
