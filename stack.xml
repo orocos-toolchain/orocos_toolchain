@@ -9,5 +9,4 @@
   <review status="unreviewed" notes=""/>
   <url>http://www.orocos.org/toolchain</url>
   <depend stack="ros" />
-  <depend stack="common_rosdeps" />
 </stack>
