@@ -1,0 +1,22 @@
+<package>
+  <name>orocos_toolchain</name>
+  <version>2.6.0</version>
+  <description>
+    This package provides the entire orocos_toolchain
+  </description>
+  <maintainer email="orocos-dev@lists.mech.kuleuven.be">Orocos Developers</maintainer>
+  <license>GPL v2 + linking exception, LGPL v2, CeCILL-B, GPL v2 or later, </license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>rtt</run_depend>
+  <run_depend>ocl</run_depend>
+  <run_depend>log4cpp</run_depend>
+  <run_depend>rtt_typelib</run_depend>
+  <run_depend>typelib</run_depend>
+  <run_depend>utilmm</run_depend>
+  <run_depend>utilrb</run_depend>
+  <run_depend>orogen</run_depend>
+
+</package>
+
