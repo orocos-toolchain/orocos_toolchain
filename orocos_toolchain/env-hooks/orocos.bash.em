@@ -1,5 +1,5 @@
-RUBY_VERSION=`ruby --version | awk '{ print $2; }' | sed -e "s/\(.*\..*\)\..*/\1/"`
-RUBY_ARCH=`ruby --version | sed -e 's/.*\[\(.*\)\]/\1/'`
+RUBY_VERSION=`ruby -r rbconfig -e "print RbConfig::CONFIG['ruby_version']"`
+RUBY_ARCH=`ruby -r rbconfig -e "print RbConfig::CONFIG['arch']"`
 export RUBYOPT=-rubygems
 export TYPELIB_USE_GCCXML=1
 
