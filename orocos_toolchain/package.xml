@@ -8,6 +8,7 @@
   <license>GPL v2 + linking exception, LGPL v2, CeCILL-B, GPL v2 or later, </license>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>catkin</run_depend>
 
   <build_depend>rtt</build_depend>
   <build_depend>ocl</build_depend>
