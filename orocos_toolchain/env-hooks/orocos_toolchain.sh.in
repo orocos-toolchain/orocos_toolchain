@@ -1,0 +1,36 @@
+#!/bin/sh
+
+export TYPELIB_USE_GCCXML=1
+
+# check if ruby is available
+if which ruby >/dev/null; then
+    _ruby=1
+    _RUBY_VERSION=`ruby -r rbconfig -e "print RbConfig::CONFIG['ruby_version']"`
+    _RUBY_ARCH=`ruby -r rbconfig -e "print RbConfig::CONFIG['arch']"`
+    export RUBYOPT=-rubygems
+else
+    _ruby=0
+fi
+
+if [ `uname -s` = Darwin ]; then
+    if [ $_ruby ]; then
+        export RUBYLIB=@CMAKE_INSTALL_PREFIX@/lib:@CMAKE_INSTALL_PREFIX@/lib/typelib:@CMAKE_INSTALL_PREFIX@/lib/ruby/${_RUBY_VERSION}/${_RUBY_ARCH}:@CMAKE_INSTALL_PREFIX@/lib/ruby/${_RUBY_VERSION}:/Library/Ruby/Gems/${_RUBY_VERSION}:/Library/Ruby/Gems/${RUBY_VERSION}/${RUBY_ARCH}:/Library/Ruby/Gems
+    fi
+    #export DYLD_LIBRARY_PATH=@CMAKE_INSTALL_PREFIX@/lib/typelib:@CMAKE_INSTALL_PREFIX@/lib/orocos:$DYLD_LIBRARY_PATH
+
+else
+    if [ $_ruby ]; then
+        export RUBYLIB=@CMAKE_INSTALL_PREFIX@/lib:@CMAKE_INSTALL_PREFIX@/lib/typelib:@CMAKE_INSTALL_PREFIX@/lib/ruby/${_RUBY_VERSION}/${_RUBY_ARCH}:@CMAKE_INSTALL_PREFIX@/lib/ruby/${_RUBY_VERSION}:
+    fi
+    #export LD_LIBRARY_PATH=@CMAKE_INSTALL_PREFIX@/lib/typelib:@CMAKE_INSTALL_PREFIX@/lib/orocos:$LD_LIBRARY_PATH
+fi
+
+if [ "x$LUA_PATH" = "x" ]; then
+    LUA_PATH=";;"
+fi
+export LUA_PATH="$LUA_PATH;@CMAKE_INSTALL_PREFIX@/share/lua/5.1/?.lua"
+
+unset _RUBY_VERSION
+unset _RUBY_ARCH
+unset _ruby
+
