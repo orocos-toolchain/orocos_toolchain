@@ -10,15 +10,6 @@
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>catkin</run_depend>
 
-  <build_depend>rtt</build_depend>
-  <build_depend>ocl</build_depend>
-  <build_depend>log4cpp</build_depend>
-  <build_depend>rtt_typelib</build_depend>
-  <build_depend>typelib</build_depend>
-  <build_depend>utilmm</build_depend>
-  <build_depend>utilrb</build_depend>
-  <build_depend>orogen</build_depend>
-
   <run_depend>rtt</run_depend>
   <run_depend>ocl</run_depend>
   <run_depend>log4cpp</run_depend>
@@ -27,6 +18,10 @@
   <run_depend>utilmm</run_depend>
   <run_depend>utilrb</run_depend>
   <run_depend>orogen</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
 
 </package>
 
