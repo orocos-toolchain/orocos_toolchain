@@ -15,7 +15,6 @@
   <run_depend>log4cpp</run_depend>
   <run_depend>rtt_typelib</run_depend>
   <run_depend>typelib</run_depend>
-  <run_depend>utilmm</run_depend>
   <run_depend>utilrb</run_depend>
   <run_depend>orogen</run_depend>
 

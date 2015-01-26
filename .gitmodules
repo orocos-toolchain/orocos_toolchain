@@ -10,9 +10,6 @@
 [submodule "typelib"]
 	path = typelib
 	url = ../typelib.git
-[submodule "utilmm"]
-	path = utilmm
-	url = ../utilmm.git
 [submodule "utilrb"]
 	path = utilrb
 	url = ../utilrb.git
