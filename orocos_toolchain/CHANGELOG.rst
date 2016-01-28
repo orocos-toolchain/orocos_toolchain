@@ -19,6 +19,16 @@ Important Caveats
   event has happened, and no longer when internal bookkeeping
   of the ExeuctionEngine happens. For full detail, see PR
   https://github.com/orocos-toolchain/rtt/pull/91
+  The motivation of this change was an older issue which reported
+  that updateHook() was called too many times, and in unpredictable
+  ways for the average user. The calling of updateHook() is now
+  fully determined and under control of the user.
+
+* RTT::base::ActivityInterface got a new pure virtual member
+  function bool timeout() which you need to implement in case
+  you created your own Activity implementation. See 
+  https://github.com/orocos/rtt_ros_integration/pull/53 for
+  an example of a solution.
 
 * Each cycle of an RTT State Machine now starts with executing
   the run {} program instead of first checking the transitions.
@@ -33,6 +43,14 @@ Important Caveats
   This change needs broader discussion in the community and
   all comments can be tracked in this issue:
   
+* OCL XML deployments treats a ConnPolicy XML Property with
+  the name "Default" as a special case. The values of the
+  "Default" ConnPolicy will be used for each unspecified field
+  in each subsequently created ConnPolicy in the current process.
+  This also influences ConnPolicy defaults in the C++ code paths
+  that have nothing to do with the XML deployment. It was introduced
+  to change at run-time the default data flow configuration,
+  which was introduced in 2.9, and still defaults to 2.8 semantics.
 
 Improvements
 ------------
@@ -54,6 +72,21 @@ Improvements
   The robustness and flexibility of the Orocos Data Flow
   has improved tremendously in this release and should hold for the
   next years.
+  It addresses all known data flow architecture issues for
+  intra- and inter-process communication. User can choose to
+  opt-in on the newly available connection policies, piecewise
+  or change the process-wide default (see OCL XML deployments
+  below as well). There is a broad motivation text linked by
+  the above PR, but one of the major motivators was to have
+  much better control and predictability over the sample-by-
+  sample dataflow going on between RTT components.
+
+
+* The CORBA Data Flow API now uses one-ways such that it performs
+  much better on any network with latency. Also the connecting
+  between RTT components over CORBA has been speed-up significantly
+  due to the improvement of the introspection+discovery. See
+  https://github.com/orocos-toolchain/rtt/pull/123 for all details.
 
 Detailed Changelogs
 -------------------
