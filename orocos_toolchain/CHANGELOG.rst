@@ -9,16 +9,24 @@ The Orocos Toolchain v2.9 release series mainly improved on the
 correct execution of the Component updateHook() and allowing
 extended configuration options when connecting Data Flow ports.
 
-There was also a big change in the RTT StateMachine execution
-semantics on a cycle-by-cycle basis, see the Caveats.
 
 Important Caveats
 -----------------
 
+* The Orocos CMake macro orocos_use_package() does not longer
+  automatically add the package to the CMake include
+  directories. It is still picked up by the orocos_component()
+  and related macros, just no longer by other targets built with
+  the standard cmake commands. Most users should not notice a
+  difference. This minor change was required to fix include
+  directory ordering issues when rebuilding a package without
+  a proper cleanup of the installation folder. For details, see
+  https://github.com/orocos-toolchain/rtt/pull/85.
+
 * updateHook() will now only be executed when an 'user' triggered
   event has happened, and no longer when internal bookkeeping
-  of the ExeuctionEngine happens. For full detail, see PR
-  https://github.com/orocos-toolchain/rtt/pull/91
+  of the ExeuctionEngine happens. For full details, see PR
+  https://github.com/orocos-toolchain/rtt/pull/91.
   The motivation of this change was an older issue which reported
   that updateHook() was called too many times, and in unpredictable
   ways for the average user. The calling of updateHook() is now
@@ -30,19 +38,6 @@ Important Caveats
   https://github.com/orocos/rtt_ros_integration/pull/53 for
   an example of a solution.
 
-* Each cycle of an RTT State Machine now starts with executing
-  the run {} program instead of first checking the transitions.
-  Previously, run {} was executed in the same cycle as the
-  exit {} + entry {} programs, in case exit {} + entry {} 
-  did not yield. 
-  Since event operation transitions are ignored during entry {}, it is
-  impossible to respond to event operations which would take one cycle
-  after run {} to be processed. In addition, this also means that
-  in this setting, a default transition would always be taken after
-  run {} if the other transitions are all event transitions.
-  This change needs broader discussion in the community and
-  all comments can be tracked in this issue:
-  
 * OCL XML deployments treats a ConnPolicy XML Property with
   the name "Default" as a special case. The values of the
   "Default" ConnPolicy will be used for each unspecified field
@@ -58,12 +53,12 @@ Improvements
 * updateHook() will now only be executed when an 'user' triggered
   event has happened, and no longer when internal bookkeeping
   of the ExeuctionEngine happens. For full detail, see PR
-  https://github.com/orocos-toolchain/rtt/pull/91
+  https://github.com/orocos-toolchain/rtt/pull/91.
   Yes, it's also a major improvement.
 
 * The RTT scripting re-added the Orocos v1 'Command', by emulating
   it when an Operation is called with the '.cmd()' suffix. See PR
-  https://github.com/orocos-toolchain/rtt/pull/84
+  https://github.com/orocos-toolchain/rtt/pull/84.
 
 * The RTT Data Flow implementation has been rewritten, in a fully
   backwards compatible way. It however adds powerful alternative 
@@ -80,7 +75,6 @@ Improvements
   the above PR, but one of the major motivators was to have
   much better control and predictability over the sample-by-
   sample dataflow going on between RTT components.
-
 
 * The CORBA Data Flow API now uses one-ways such that it performs
   much better on any network with latency. Also the connecting
