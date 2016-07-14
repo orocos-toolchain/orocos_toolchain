@@ -1,34 +1,44 @@
+#!/bin/sh
+#
+# The purpose of this script is to setup the environment for the Orocos Toolchain
+# (like setup.sh) and execute a command.
+#
+# Usage: env.sh COMMANDS
+#
+# This file will be installed to CMAKE_INSTALL_PREFIX by cmake with the
+# @-references replaced by the value of the respective cmake variable.
+#
 
-RUBY_VERSION=`ruby --version | awk '{ print $2; }' | sed -e "s/\(.*\..*\)\..*/\1/"`
-RUBY_ARCH=`ruby --version | sed -e 's/.*\[\(.*\)\]/\1/'`
-export RUBYOPT=-rubygems
-export TYPELIB_USE_GCCXML=1
-
-
-if [ x$ROS_ROOT != x ]; then
-### ROS
-export RUBYLIB=`rospack find utilrb`/lib:`rospack find orogen`/lib:`rosstack find orocos_toolchain`/install/lib/ruby/${RUBY_VERSION}/${RUBY_ARCH}:`rosstack find orocos_toolchain`/install/lib/ruby/${RUBY_VERSION}
-export GEM_HOME=`rosstack find orocos_toolchain`/.gems
-export PATH=`rosstack find orocos_toolchain`/install/bin:`rospack find orogen`/bin:`rosstack find orocos_toolchain`/.gems/bin:$PATH
-export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:`rosstack find orocos_toolchain`/install/lib/pkgconfig
-
-elif [ x${BASH} != x ]; then
-### Bash non-ROS
-cd `dirname ${BASH_SOURCE[0]}`
-envpath=$PWD
-cd - > /dev/null
-export RUBYLIB=$envpath/utilrb/lib:$envpath/orogen/lib:$envpath/install/lib/ruby/${RUBY_VERSION}/${RUBY_ARCH}:$envpath/install/lib/ruby/${RUBY_VERSION}
-export GEM_HOME=$envpath/.gems
-export PATH=$envpath/install/bin:$envpath/orogen/bin:$envpath/.gems/bin:$PATH
-export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:$envpath/install/lib/pkgconfig
-
-elif [ `basename $PWD` = orocos_toolchain ]; then
-### non-Bash, non-ROS
-export RUBYLIB=$PWD/utilrb/lib:$PWD/orogen/lib:$PWD/install/lib/ruby/${RUBY_VERSION}/${RUBY_ARCH}:$PWD/install/lib/ruby/${RUBY_VERSION}
-export GEM_HOME=$PWD/.gems
-export PATH=$PWD/install/bin:$PWD/orogen/bin:$PWD/.gems/bin:$PATH
-export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:$PWD/install/lib/pkgconfig
-else
-  echo "Error: This script must be sourced from the 'orocos_toolchain' directory when not running in a ROS_ROOT nor bash environment."
-  echo  
+if [ $# -eq 0 ] ; then
+  /bin/echo "Usage: env.sh COMMANDS" >&2
+  if [ -z "$BASH_SOURCE" -a -z "$_" ]; then
+    exit 1
+  else
+    return
+  fi
 fi
+
+# find OROCOS installation folder from CMAKE_INSTALL_PREFIX or $0
+case "@CMAKE_INSTALL_PREFIX@" in
+  @*) ;;
+  *)  OROCOS_INSTALL_PREFIX="@CMAKE_INSTALL_PREFIX@" ;;
+esac
+if [ -z "$OROCOS_INSTALL_PREFIX" ]; then
+  OROCOS_INSTALL_PREFIX=`dirname $0`
+  OROCOS_INSTALL_PREFIX=`cd ${OROCOS_INSTALL_PREFIX}; pwd`
+fi
+
+# source setup.sh
+if [ -f ${OROCOS_INSTALL_PREFIX}/setup.sh ]; then
+  . ${OROCOS_INSTALL_PREFIX}/setup.sh
+elif [ -f ${OROCOS_INSTALL_PREFIX}/etc/orocos/setup.sh ]; then
+  . ${OROCOS_INSTALL_PREFIX}/etc/orocos/setup.sh
+elif [ -f /etc/orocos/setup.sh ]; then
+  . /etc/orocos/setup.sh
+else
+  echo "env.sh: could not find Orocos setup.sh script" >&2
+  exit 1
+fi
+
+# execute command
+exec "$@"

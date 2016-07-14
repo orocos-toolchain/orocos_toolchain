@@ -1,20 +1,6 @@
-# The OROCOS Real-Time Toolkit Installation Guide
+# The OROCOS Toolchain Installation Guide
 
-This document explains how the Real-Time Toolkit of [Orocos](http://www.orocos.org/), the Open RObot COntrol Software project must be installed and configured.
-
-The Orocos Toolchain is a bundle of multiple packages, which need to be build and installed separately.
-
-- [Real-Time Toolkit (rtt)](https://github.com/orocos-toolchain/rtt) - a component framework that allows us to write real-time components in C++
-- [Orocos Log4cpp (log4cpp)](https://github.com/orocos-toolchain/log4cpp) -
-  a patched version of the [Log4cpp](http://log4cpp.sourceforge.net/) library for flexible logging to files, syslog, IDSA and other destinations
-- [Orocos Component Library (ocl)](https://github.com/orocos-toolchain/ocl) - the necessary components to start an application and interact with it at run-time
-
-Until version 2.8 [orogen](http://www.rock-robotics.org/stable/documentation/orogen/) and [typegen](http://www.rock-robotics.org/stable/documentation/orogen/), tools to generate ready-to-compile-and-run code from existing headers or component description files, have been an integral part of the Orocos Toolchain. For later versions we refer to the installation instructions of the [Rock - the Robot Construction Kit](http://www.rock-robotics.org/stable/index.html) project.
-
-You might also want to have a look at the following sister projects, which are out of the scope of this manual:
-- [Orocos Kinematics Dynamics Library (KDL)](http://www.orocos.org/kdl) - an application independent framework for modeling and computation of kinematic chains
-- [Orocos Bayesian Filtering Library (BFL)](http://www.orocos.org/bfl) - an application independent framework for inference in Dynamic Bayesian Networks, i.e., recursive information processing and estimation algorithms based on Bayes' rule
-- [Reduced Finite State Machine (rFSM)](https://orocos.github.io/rFSM/README.html) - a small and powerful statechart implementation in Lua
+This document explains how the [Orocos](http://www.orocos.org/) toolchain can be installed and configured.
 
 ## Table of Contents
 <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
@@ -25,17 +11,18 @@ You might also want to have a look at the following sister projects, which are o
 	- [The versioning scheme](#the-versioning-scheme)
 	- [Dependencies on other libraries](#dependencies-on-other-libraries)
 - [Binary packages](#binary-packages)
-	- [Ubuntu](#ubuntu)
+	- [Ubuntu and Debian](#ubuntu-and-debian)
 - [Install from source](#install-from-source)
-	- [Quick start](#quick-start)
 	- [Build tools and dependencies](#build-tools-and-dependencies)
 		- [Debian/Ubuntu](#debianubuntu)
 		- [Other Linux distributions](#other-linux-distributions)
 		- [MacOS X](#macos-x)
 		- [Windows](#windows)
+	- [Quick start](#quick-start)
 	- [Download the sources](#download-the-sources)
 		- [Download source archive](#download-source-archive)
 		- [Clone from GitHub](#clone-from-github)
+	- [3. Build and Install](#3-build-and-install)
 - [Getting Started](#getting-started)
 - [Cross Compiling Orocos](#cross-compiling-orocos)
 
@@ -76,9 +63,9 @@ All these packages are provided by most Linux distributions. In Mac OS X, you ca
 
 ## Binary packages
 
-### Ubuntu
+### Ubuntu and Debian
 
-We currently only provide packages for the Ubuntu Linux distributions via the [Robot Operating System (ROS)](http://www.ros.org/) build infrastructure. See [REP 3 - Target Platforms](http://www.ros.org/reps/rep-0003.html) for a list of supported platforms. The dependencies of the Orocos core packages to other ROS packages are minimal. This is the recommended way to get started with the toolchain for Ubuntu users.
+The [Robot Operating System (ROS)](http://www.ros.org/) project provides binary packages for Ubuntu and Debian Jessie. See [REP 3 - Target Platforms](http://www.ros.org/reps/rep-0003.html) for a list of supported platforms. The dependencies of the Orocos core packages to other ROS packages are minimal. This is the recommended way to get started with the toolchain for Ubuntu and Debian users.
 
 Check out the [ROS Installation instructions](http://wiki.ros.org/ROS/Installation) for detailed instructions on how to install a ROS base system. Afterwards, the Orocos Toolchain can be installed with the command
 
@@ -87,18 +74,6 @@ sudo apt-get install ros-<distro>-orocos-toolchain
 ```
 
 ## Install from source
-
-### Quick start
-
-The [orocos_toolchain](https://github.com/orocos-toolchain/orocos_toolchain) repository contains a shell script which implements all of the following steps and is the recommended way to install the Orocos toolchain from source:
-
-For Linux:
-```
-mkdir -p ~/orocos-toolchain
-cd ~/orocos-toolchain
-wget https://raw.githubusercontent.com/orocos-toolchain/orocos_toolchain/master/install.sh
-./install.sh --help
-```
 
 ### Build tools and dependencies
 
@@ -124,6 +99,20 @@ sudo apt-get install omniorb omniidl omniorb-idl omniorb-nameserver libomniorb4-
 
 #### Windows
 *TODO*
+
+### Quick start
+
+The [orocos_toolchain](https://github.com/orocos-toolchain/orocos_toolchain) repository contains a shell script which implements all of the following steps and is the recommended way to install the Orocos toolchain from source:
+
+For Linux:
+```
+mkdir -p ~/orocos-toolchain
+cd ~/orocos-toolchain
+wget https://raw.githubusercontent.com/orocos-toolchain/orocos_toolchain/master/install.sh
+./install.sh --help
+```
+
+If you want to download or clone the sources manually and have full control over the build process, feel free to go o
 
 ### Download the sources
 
@@ -152,7 +141,7 @@ git clone --recursive https://github.com/orocos-toolchain/orocos_toolchain.git
 cd orocos-toolchain
 ```
 
-In order to select a specific major and minor version of the toolchain, select the branch to be cloned explicitly with the `-b` option, e.g.:
+In order to select a specific major and minor version of the toolchain, you can specify the branch to be cloned explicitly with the `-b` option, e.g.:
 
 ```
 mkdir -p ~/orocos-toolchain && cd ~/orocos-toolchain
@@ -161,6 +150,12 @@ cd orocos-toolchain
 ```
 
 The `--recursive` argument is required because the toolchain GIT repository uses submodules to manage the links to the individual source repositories.
+
+### 3. Build and Install
+
+All toolchain packages rely on cmake as the underlying build tool, but every package has to be configured, build and installed in isolation.
+Advanced users can invoke cmake and make directly or use [catkin](http://wiki.ros.org/catkin) or [catkin_tools](https://catkin-tools.readthedocs.io/en/latest/) as a build tool.
+Otherwise it is recommended to use the `install.sh` script provided in the toolchain repository, which iterates over all toolchain packages in the right order and invokes cmake, make and make install within the `build/<package>` directory for each of them.
 
 ## Getting Started
 
