@@ -10,11 +10,9 @@
 #
 
 if [ $# -eq 0 ] ; then
-  /bin/echo "Usage: env.sh COMMANDS" >&2
   if [ -z "$BASH_SOURCE" -a -z "$_" ]; then
+    /bin/echo "Usage: env.sh COMMANDS" >&2
     exit 1
-  else
-    return
   fi
 fi
 
@@ -37,8 +35,8 @@ elif [ -f /etc/orocos/setup.sh ]; then
   . /etc/orocos/setup.sh
 else
   echo "env.sh: could not find Orocos setup.sh script" >&2
-  exit 1
+  [ $# -eq 0 ] || exit 1
 fi
 
 # execute command
-exec "$@"
+[ $# -eq 0 ] || exec "$@"
