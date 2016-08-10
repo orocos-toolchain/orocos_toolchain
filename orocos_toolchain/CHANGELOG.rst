@@ -82,6 +82,14 @@ Improvements
   due to the improvement of the introspection+discovery. See
   https://github.com/orocos-toolchain/rtt/pull/123 for all details.
 
+Other API changes
+-----------------
+
+* The method `RTT::Property<T>::copy()` introduced in version 2.7
+  to fix a memory leak in class `PropertyBag` has been removed in
+  favor of an overload of `RTT::Property<T>::create()` that accepts
+  a data source. See https://github.com/orocos-toolchain/rtt/pull/159.
+
 Detailed Changelogs
 -------------------
 
