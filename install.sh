@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e            # abort on error
-cd $(dirname $0)
+#cd $(dirname $0)
 
 # ##############################################################################
 # Default options
@@ -391,9 +391,9 @@ while true; do
       GIT_BRANCH="$2"
       shift 2 ;;
     -u|--url)
-      GIT_URL="$2"
-      if [ "${GIT_URL}" = "${GIT_URL%/}" ]; then
-        GIT_URL="${GIT_URL}/"
+      GIT_BASE_URL="$2"
+      if [ "${GIT_URL}" = "${GIT_BASE_URL%/}" ]; then
+        GIT_BASE_URL="${GIT_BASE_URL}/"
       fi
       shift 2 ;;
     --no-deps)
