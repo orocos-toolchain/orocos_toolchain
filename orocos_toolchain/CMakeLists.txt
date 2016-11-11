@@ -4,11 +4,15 @@ project(orocos_toolchain)
 find_package(catkin QUIET)
 if(catkin_FOUND)
   catkin_metapackage()
+
 else()
   install(FILES
     package.xml
     DESTINATION share/${PROJECT_NAME}/
   )
+
+  # need to find Orocos RTT to set OROCOS_TARGET and other cmake variables
+  find_package(OROCOS-RTT REQUIRED)
 
   set(OROCOS_SETUP_DESTINATION "etc/orocos")
   configure_file(../setup.sh ${CMAKE_CURRENT_BINARY_DIR}/setup.sh @ONLY)
