@@ -26,7 +26,7 @@ if [ -z "$OROCOS_INSTALL_PREFIX" ]; then
   fi
 fi
 
-# set OROCOS_TARGET
+# initialize OROCOS_TARGET if unset
 if [ -z "${OROCOS_TARGET}" ]; then
   case "@OROCOS_TARGET@" in
     @*) ;;
@@ -38,6 +38,17 @@ fi
 if [ -d ${OROCOS_INSTALL_PREFIX}/bin ]; then
   if ! echo $PATH | grep -q "${OROCOS_INSTALL_PREFIX}/bin"; then
     PATH="${PATH}:${OROCOS_INSTALL_PREFIX}/bin"
+  fi
+fi
+
+# add OROCOS_INSTALL_PREFIX to CMAKE_PREFIX_PATH
+if [ -d ${OROCOS_INSTALL_PREFIX} ]; then
+  if ! echo $CMAKE_PREFIX_PATH | grep -q "${OROCOS_INSTALL_PREFIX}"; then
+    if [ -z "$CMAKE_PREFIX_PATH" ]; then
+      CMAKE_PREFIX_PATH="${OROCOS_INSTALL_PREFIX}"
+    else
+      CMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}:${OROCOS_INSTALL_PREFIX}"
+    fi
   fi
 fi
 
@@ -74,5 +85,6 @@ done
 export OROCOS_INSTALL_PREFIX
 export OROCOS_TARGET
 export PATH
+export CMAKE_PREFIX_PATH
 export RTT_COMPONENT_PATH
 export PKG_CONFIG_PATH
