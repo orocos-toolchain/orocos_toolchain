@@ -27,7 +27,7 @@ addons:
       - omniidl
       - omniorb-idl
       - omniorb-nameserver
-      - libomniorb-dev
+      - libomniorb4-dev
 
 before_install:
   -  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
