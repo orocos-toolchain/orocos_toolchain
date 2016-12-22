@@ -1,0 +1,36 @@
+language: c++
+
+compiler:
+  - gcc
+  - clang
+
+matrix:
+    include:
+        - os: linux
+          dist: trusty
+        - os: linux
+          dist: xenial
+        - os: osx
+          osx_image: xcode7.2
+        - os: osx
+          osx_image: xcode8.2
+
+addons:
+  apt:
+    packages:
+      - build-essential
+      - git
+      - cmake
+      - libboost-all-dev
+      - libxml-xpath-perl
+      - omniorb
+      - omniidl
+      - omniorb-idl
+      - omniorb-nameserver
+      - libomniorb-dev
+
+before_install:
+  -  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
+  -  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install boost cmake omniorb ; fi
+
+script: ./install.sh
