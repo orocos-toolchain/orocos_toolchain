@@ -10,10 +10,10 @@ DEFAULT_PREFIX=/usr/local
 : ${PREFIX:=$DEFAULT_PREFIX}
 if [ -e .git ]; then
   # build in-source
-  DEFAULT_SOURCES=`readlink -fm .`
+  DEFAULT_SOURCES=`readlink -fm . 2>/dev/null || readlink . || echo .`
 else
   # build out of source
-  DEFAULT_SOURCES=`readlink -fm src/orocos-toolchain`
+  DEFAULT_SOURCES=`readlink -fm src/orocos-toolchain 2>/dev/null || readlink src/orocos-toolchain || echo src/orocos-toolchain`
 fi
 : ${SOURCES:=$DEFAULT_SOURCES}
 DEFAULT_GIT_BASE_URL=https://github.com/orocos-toolchain/
@@ -400,10 +400,10 @@ while true; do
       NO_DEPS=true
       shift ;;
     --prefix)
-      PREFIX=`readlink -fm "$2"`
+      PREFIX=`readlink -fm "$2" 2>/dev/null || readlink "$2" || echo "$2"`
       shift 2 ;;
     -s|--source)
-      SOURCES=`readlink -fm "$2"`
+      SOURCES=`readlink -fm "$2" 2>/dev/null || readlink "$2" || echo "$2"`
       shift 2 ;;
     -c|--clean)
       CLEAN=true
