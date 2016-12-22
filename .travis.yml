@@ -1,9 +1,5 @@
 language: c++
 
-compiler:
-  - gcc
-  - clang
-
 matrix:
     include:
         - os: linux
