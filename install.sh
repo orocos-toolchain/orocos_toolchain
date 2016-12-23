@@ -10,7 +10,7 @@ DEFAULT_PREFIX=/usr/local
 : ${PREFIX:=$DEFAULT_PREFIX}
 if [ -e .git ]; then
   # build in-source
-  DEFAULT_SOURCES=`readlink -fm . 2>/dev/null || readlink . || echo .`
+  DEFAULT_SOURCES=`readlink -fm . 2>/dev/null || readlink . || echo $PWD`
 else
   # build out of source
   DEFAULT_SOURCES=`readlink -fm src/orocos-toolchain 2>/dev/null || readlink src/orocos-toolchain || echo src/orocos-toolchain`
