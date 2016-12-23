@@ -1,8 +1,5 @@
 language: c++
-
-compiler:
-  - gcc
-  - clang
+sudo: false
 
 matrix:
     include:
@@ -14,8 +11,6 @@ matrix:
           osx_image: xcode7.2
         - os: osx
           osx_image: xcode8.2
-
-#Dependencies
 
 addons:
   apt:
@@ -29,10 +24,11 @@ addons:
       - omniidl
       - omniorb-idl
       - omniorb-nameserver
-      - libomniorb-dev
+      - libomniorb4-dev
 
 before_install:
-  -  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
-  -  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install boost cmake omniorb ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install boost cmake omniorb ; fi
 
-script: ./install.sh
+script: 
+  - ./install.sh --prefix $HOME/install --enable-tests --enable-corba --enable-mqueue
