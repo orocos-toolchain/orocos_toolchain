@@ -435,8 +435,8 @@ if [ -n "$VERBOSE" ]; then
   [ -n "${OROCOS_TARGET}" ]                 && echo "[$SCRIPT_NAME] Building for OROCOS target \"${OROCOS_TARGET}\"" >&2
   [ -n "${CMAKE_BUILD_TYPE}" ]              && echo "[$SCRIPT_NAME] Building with CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE}" >&2
   [ -n "${PREFIX}" ]                        && echo "[$SCRIPT_NAME] Installing to ${PREFIX}" >&2
-  [ -n "${FEATURES_ENABLED}" ]              && echo "[$SCRIPT_NAME] Enabled OROOCS features: ${FEATURES_ENABLED}" >&2
-  [ -n "${FEATURES_DISABLED}" ]             && echo "[$SCRIPT_NAME] Disabled OROCOS features: ${FEATURES_DISABLED}" >&2
+  [ -n "${FEATURES_ENABLED}" ]              && echo "[$SCRIPT_NAME] Enabled OROCOS features: ${FEATURES_ENABLED[@]}" >&2
+  [ -n "${FEATURES_DISABLED}" ]             && echo "[$SCRIPT_NAME] Disabled OROCOS features: ${FEATURES_DISABLED[@]}" >&2
   [ -n "${JOBS}" ]                          && echo "[$SCRIPT_NAME] Make job options: ${JOBS}" >&2
   echo >&2
 fi
