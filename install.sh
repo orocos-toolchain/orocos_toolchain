@@ -320,8 +320,10 @@ function is_feature_disabled()
 # Detect platform settings
 # ##############################################################################
 PLATFORM=`uname -s || true`
-LINUX_DISTRO=`lsb_release -si`
-LINUX_CODENAME=`lsb_release -sc`
+if [ "$PLATFORM" = "Linux" ]; then
+  LINUX_DISTRO=`lsb_release -si || true`
+  LINUX_CODENAME=`lsb_release -sc || true`
+fi
 
 # ##############################################################################
 # Parse command line options
