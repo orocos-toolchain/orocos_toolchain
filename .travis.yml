@@ -1,19 +1,8 @@
 language: c++
 sudo: false
 
-matrix:
-    include:
-        - os: linux
-          dist: trusty
-        - os: linux
-          dist: xenial
-        - os: osx
-          osx_image: xcode7.3
-        - os: osx
-          osx_image: xcode8.2
-
 addons:
-  apt:
+  apt: &apt
     packages:
       - build-essential
       - git
@@ -26,10 +15,27 @@ addons:
       - omniorb-nameserver
       - libomniorb4-dev
 
+matrix:
+    include:
+        - os: linux
+          dist: trusty
+          addons:
+            apt:
+              <<: *apt
+        - os: linux
+          dist: xenial
+          addons:
+            apt:
+              <<: *apt
+        - os: osx
+          osx_image: xcode7.3
+        - os: osx
+          osx_image: xcode8.2
+
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew reinstall boost cmake omniorb gnu-getopt ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --force gnu-getopt ; fi
 
-script: 
+script:
   - ./install.sh --verbose --prefix $HOME/install --enable-tests --enable-corba --enable-mqueue
