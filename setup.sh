@@ -2,7 +2,7 @@
 #
 # The purpose of this script is to setup the environment for the Orocos Toolchain.
 #
-# Usage: . @CMAKE_INSTALL_PREFIX@/etc/orocos/setup.sh
+# Usage: . @CMAKE_INSTALL_PREFIX@/@OROCOS_SETUP_DESTINATION@/setup.sh
 #
 # This file will be installed to CMAKE_INSTALL_PREFIX by cmake with the
 # @-references replaced by the value of the respective cmake variable.
@@ -77,7 +77,7 @@ if [ -d ${OROCOS_INSTALL_PREFIX}/lib/pkgconfig ]; then
 fi
 
 # find and source target-specific env-hooks in etc/orocos/profile.d
-for hook in ${OROCOS_INSTALL_PREFIX}/etc/orocos/${OROCOS_TARGET}/profile.d/*.sh; do
+for hook in ${OROCOS_INSTALL_PREFIX}/etc/orocos/profile.d/*.sh; do
   [ -f $hook ] && . ${hook}
 done
 
