@@ -26,8 +26,9 @@ matrix:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew reinstall boost cmake omniorb gnu-getopt ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew reinstall boost cmake readline omniorb gnu-getopt ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --force gnu-getopt ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --force readline ; fi
 
 script:
   - ./install.sh --verbose --prefix $HOME/install --enable-tests --enable-corba --enable-mqueue
