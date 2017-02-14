@@ -31,4 +31,4 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --force readline ; fi
 
 script:
-  - ./install.sh --verbose --prefix $HOME/install --enable-tests --enable-corba --enable-mqueue
+  - ./install.sh --verbose --prefix $HOME/install --enable-corba --enable-mqueue
