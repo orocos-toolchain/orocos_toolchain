@@ -1,0 +1,34 @@
+language: c++
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - build-essential
+      - git
+      - cmake
+      - libboost-all-dev
+      - libxml-xpath-perl
+      - omniorb
+      - omniidl
+      - omniorb-idl
+      - omniorb-nameserver
+      - libomniorb4-dev
+
+matrix:
+    include:
+        - os: linux
+          dist: trusty
+        - os: osx
+          osx_image: xcode7.3
+        - os: osx
+          osx_image: xcode8.2
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew reinstall boost cmake readline omniorb gnu-getopt ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --force gnu-getopt ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --force readline ; fi
+
+script:
+  - ./install.sh --verbose --prefix $HOME/install --enable-corba --enable-mqueue
