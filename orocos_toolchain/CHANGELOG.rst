@@ -47,6 +47,16 @@ Important Caveats
   to change at run-time the default data flow configuration,
   which was introduced in 2.9, and still defaults to 2.8 semantics.
 
+* For the `gnulinux` and `macosx` targets, periodic components,
+  timers or waiting on a condition variable are not affected by system
+  clock adjustments anymore (e.g. due to NTP). Therefore the timestamp
+  returned by `RTT::os::TimeService::getNSecs()` is also retrieved
+  from a monotonic clock. Before, the method returned the real/wall time
+  (as nanoseconds since the Unix epoch, 1 January 1970, 00:00:00 UTC).
+  Only use the returned time for relative comparisons or for
+  `RTT::os::Condition::wait_until(m, abs_time)`. See PR
+  https://github.com/orocos-toolchain/rtt/pull/258. 
+
 Improvements
 ------------
 
