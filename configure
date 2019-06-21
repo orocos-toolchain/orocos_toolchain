@@ -1,0 +1,59 @@
+#!/bin/bash
+
+##
+usage() {
+  cat <<USAGE >&2
+Usage: $0 [<options>] [<additional cmake arguments>]
+
+Available options:
+
+  --prefix <prefix>        Installation prefix (-DCMAKE_INSTALL_PREFIX)
+
+  --{en|dis}able-corba     Enable/Disable CORBA transport plugin (-DENABLE_CORBA)
+  --omniorb                Select CORBA implementation OmniORB
+  --tao                    Select CORBA implementation TAO
+
+USAGE
+  exit 1
+}
+
+## Parse command line arguments
+CMAKE_ARGS=()
+while (( "$#" )); do
+  case "$1" in
+    --help|-h)
+      usage ;;
+
+    --prefix=*)
+      # set as two separate options
+      prefix=${1#--prefix=}
+      shift
+      set -- --prefix "${prefix}" "$@"
+      ;;
+
+    --prefix)
+      CMAKE_ARGS+=("-DCMAKE_INSTALL_PREFIX=$2")
+      shift 2 ;;
+
+    --enable-corba)
+      CMAKE_ARGS+=("-DENABLE_CORBA=ON")
+      shift ;;
+    --disable-corba)
+      CMAKE_ARGS+=("-DENABLE_CORBA=OFF")
+      shift ;;
+    --omniorb)
+      CMAKE_ARGS+=("-DCORBA_IMPLEMENTATION=OMNIORB")
+      shift ;;
+    --tao)
+      CMAKE_ARGS+=("-DCORBA_IMPLEMENTATION=TAO")
+      shift ;;
+
+    *)
+      CMAKE_ARGS+=("$1")
+      shift ;;
+  esac
+done
+
+## Invoke cmake
+mkdir -p build && cd build && cmake .. "${CMAKE_ARGS[@]}"
+
