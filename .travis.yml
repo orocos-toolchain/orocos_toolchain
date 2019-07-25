@@ -1,0 +1,74 @@
+language: generic
+cache: ccache
+
+addons:
+  apt:
+    packages:
+      - build-essential
+      - git
+      - cmake
+      - libboost-all-dev
+      - libxml-xpath-perl
+      - libboost-all-dev
+      - omniorb
+      - omniidl
+      - omniorb-nameserver
+      - libomniorb4-dev
+      - pkg-config
+      - clang-3.8
+
+env:
+  global:
+    - BOOST_TEST_LOG_LEVEL=message
+    - CFLAGS="-Wall -Wextra -Wno-unused-parameter"
+
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+      env: COMPILER=gcc CXXFLAGS="-std=c++03 -Wall -Wextra -Wno-unused-parameter"
+    - os: linux
+      dist: xenial
+      env: COMPILER=gcc CXXFLAGS="-std=c++11 -Wall -Wextra -Wno-unused-parameter"
+    - os: linux
+      dist: xenial
+      env: COMPILER=clang-3.8 CXXFLAGS="-std=c++11 -Wall -Wextra -Wno-unused-parameter"
+    - os: linux
+      dist: xenial
+      env: COMPILER=clang CXXFLAGS="-std=c++11 -Wall -Wextra -Wno-unused-parameter"
+    - os: osx
+      osx_image: xcode10.1
+
+branches:
+  only:
+  - master
+  - /^toolchain-[\d\.]+[\d]$/
+
+before_install:
+  # Set C/C++ compiler
+  - |
+    if [[ "${COMPILER}" != "" ]]; then
+      export CC=${COMPILER}
+      if [[ "${COMPILER}" == "gcc"* ]]; then
+        export CXX=${COMPILER/gcc/g++}
+      elif [[ "${COMPILER}" == "clang"* ]]; then
+        export CXX=${COMPILER/clang/clang++}
+      fi
+      ${CC} --version
+      ${CXX} --version
+    fi
+
+  # Install HomeBrew dependencies (macOS only)
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      brew update
+      brew reinstall boost cmake ccache gnu-getopt readline omniorb
+      brew link --force gnu-getopt
+      brew link --force readline
+      export PATH="/use/local/opt/ccache/libexec:$PATH"
+    fi
+
+script:
+  # Build and install the Orocos Toolchain
+  - ./configure --enable-corba --omniorb
+  - make -j2 install
