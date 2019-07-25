@@ -12,8 +12,23 @@ else()
   )
 endif()
 
-# need to find Orocos RTT to set OROCOS_TARGET and other cmake variables
-find_package(OROCOS-RTT REQUIRED)
+# Set the default target operating system, if unspecified
+set(DOC_STRING "The Operating System target. One of [gnulinux lxrt macosx win32 xenomai]")
+set(OROCOS_TARGET_ENV $ENV{OROCOS_TARGET}) # MUST use helper variable, otherwise not picked up !!!
+if(OROCOS_TARGET_ENV)
+  set(OROCOS_TARGET ${OROCOS_TARGET_ENV} CACHE STRING "${DOC_STRING}" FORCE)
+  message(STATUS "- Detected OROCOS_TARGET environment variable. Using: ${OROCOS_TARGET}")
+else()
+  if(NOT DEFINED OROCOS_TARGET)
+    if(MSVC)
+      set(OROCOS_TARGET win32    CACHE STRING "${DOC_STRING}")
+    elseif(APPLE AND CMAKE_SYSTEM_NAME MATCHES "Darwin")
+      set(OROCOS_TARGET macosx   CACHE STRING "${DOC_STRING}")
+    else()
+      set(OROCOS_TARGET gnulinux CACHE STRING "${DOC_STRING}")
+    endif()
+  endif()
+endif()
 
 set(OROCOS_SETUP_DESTINATION "etc/orocos" CACHE STRING "Destination folder for Orocos setup files (setup.sh, env.sh), relative to CMAKE_INSTALL_PREFIX")
 configure_file(../setup.sh ${CMAKE_CURRENT_BINARY_DIR}/setup.sh @ONLY)
