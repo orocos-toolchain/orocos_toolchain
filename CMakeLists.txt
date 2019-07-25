@@ -91,23 +91,8 @@ else()
 endif()
 
 set(GIT_BASE_URL "https://github.com/orocos-toolchain/")
-#set(GIT_TAG "" CACHE STRING "Git branch or tag to checkout in submodules. Default to current branch (update) or default branch (clone).")
+set(GIT_TAG "" CACHE STRING "Git branch or tag to checkout in submodules. If empty, use the commits tracked by submodules or the default branches.")
 
-# Find current branch if this is a git tree and use it as a default.
-if(IS_GIT)
-  execute_process(
-    COMMAND git --git-dir=${CMAKE_CURRENT_SOURCE_DIR}/.git symbolic-ref --short HEAD
-    OUTPUT_VARIABLE CURRENT_GIT_BRANCH
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_QUIET
-  )
-  if(CURRENT_GIT_BRANCH)
-    message(STATUS "Current orocos_toolchain branch: ${CURRENT_GIT_BRANCH}")
-    if(NOT DEFINED GIT_TAG)
-      set(GIT_TAG ${CURRENT_GIT_BRANCH})  # not cached!
-    endif()
-  endif()
-endif()
 if(GIT_TAG)
   message(STATUS "Building branch or tag ${GIT_TAG} for all submodules.")
 endif()
