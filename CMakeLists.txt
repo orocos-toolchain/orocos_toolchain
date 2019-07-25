@@ -176,7 +176,7 @@ build_external_project(typelib
   DEPENDS utilrb
 )
 build_external_project(rtt_typelib
-  DEPENDS typelib
+  DEPENDS rtt typelib
 )
 build_external_project(orogen
   DEPENDS rtt rtt_typelib utilrb
