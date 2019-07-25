@@ -26,7 +26,7 @@ matrix:
   include:
     - os: linux
       dist: xenial
-      env: COMPILER=gcc CXXFLAGS="-std=c++03 -Wall -Wextra -Wno-unused-parameter"
+      env: COMPILER=gcc CXXFLAGS="-std=gnu++03 -Wall -Wextra -Wno-unused-parameter"
     - os: linux
       dist: xenial
       env: COMPILER=gcc CXXFLAGS="-std=c++11 -Wall -Wextra -Wno-unused-parameter"
