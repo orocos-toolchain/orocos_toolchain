@@ -1,26 +1,23 @@
-<package>
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>orocos_toolchain</name>
   <version>2.10.0</version>
   <description>
-    This package provides the entire orocos_toolchain
+    This metapackage provides Orocos RTT and OCL and dependencies.
   </description>
-  <maintainer email="orocos-dev@lists.mech.kuleuven.be">Orocos Developers</maintainer>
-  <license>GPL v2 + linking exception, LGPL v2, CeCILL-B, GPL v2 or later, </license>
+  <license>GPL v2 + linking exception<license>
+  <licence>LGPL-2.1</license>
+  <maintainer email="orocos-dev@orocos.org">Orocos Developers</maintainer>
 
-  <buildtool_depend>catkin</buildtool_depend>
-  <run_depend>catkin</run_depend>
+  <buildtool_depend>catkin</buildtool_depend> <!-- optional -->
 
-  <run_depend>rtt</run_depend>
-  <run_depend>ocl</run_depend>
-  <run_depend>log4cpp</run_depend>
-  <run_depend>rtt_typelib</run_depend>
-  <run_depend>typelib</run_depend>
-  <run_depend>utilrb</run_depend>
-  <run_depend>orogen</run_depend>
+  <depend>log4cpp</depend>
+  <depend>ocl</depend>
+  <depend>rtt</depend>
 
   <export>
     <metapackage/>
   </export>
 
 </package>
-
