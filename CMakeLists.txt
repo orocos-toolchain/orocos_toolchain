@@ -80,6 +80,11 @@ else()
   set(CORBA_IMPLEMENTATION ${CORBA_IMPLEMENTATION} CACHE STRING "The implementation of CORBA to use (allowed values: TAO or OMNIORB )" )
 endif()
 
+#
+# Enable/disable orogen and dependencies
+#
+option(BUILD_OROGEN "Build orogen and its dependencies" OFF)
+
 #############
 # Git magic #
 #############
@@ -171,16 +176,18 @@ build_external_project(ocl
   DEPENDS log4cpp rtt
 )
 
-build_external_project(utilrb)
-build_external_project(typelib
-  DEPENDS utilrb
-)
-build_external_project(rtt_typelib
-  DEPENDS rtt typelib
-)
-build_external_project(orogen
-  DEPENDS rtt rtt_typelib utilrb
-)
+if(BUILD_OROGEN)
+  build_external_project(utilrb)
+  build_external_project(typelib
+    DEPENDS utilrb
+  )
+  build_external_project(rtt_typelib
+    DEPENDS rtt typelib
+  )
+  build_external_project(orogen
+    DEPENDS rtt rtt_typelib utilrb
+  )
+endif()
 
 #######################################
 # Build orocos_toolchain meta package #
