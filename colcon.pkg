@@ -1,0 +1,3 @@
+{
+    "hooks": [ "etc/orocos/setup.sh" ]
+}
