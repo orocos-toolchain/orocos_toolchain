@@ -6,8 +6,8 @@
   <description>
     This metapackage provides Orocos RTT and OCL and dependencies.
   </description>
-  <license>GPL v2 + linking exception<license>
-  <licence>LGPL-2.1</license>
+  <license>GPL v2 + linking exception</license>
+  <license>LGPL-2.1</license>
   <maintainer email="orocos-dev@orocos.org">Orocos Developers</maintainer>
 
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend> <!-- optional -->
