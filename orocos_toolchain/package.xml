@@ -12,9 +12,9 @@
 
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend> <!-- optional -->
 
-  <depend>log4cpp</depend>
-  <depend>ocl</depend>
-  <depend>rtt</depend>
+  <exec_depend>log4cpp</exec_depend>
+  <exec_depend>ocl</exec_depend>
+  <exec_depend>rtt</exec_depend>
 
   <export>
     <metapackage/>
