@@ -63,8 +63,15 @@ before_install:
     if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       brew update
       brew reinstall boost cmake ccache gnu-getopt readline omniorb
-      brew link --force gnu-getopt
-      brew link --force readline
+
+      # gnu-getopt is keg-only and newer HomeBrew versions refuse to link it.
+      #brew link --force gnu-getopt
+      export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+
+      # readline is keg-only and newer HomeBrew versions refuse to link it.
+      #brew link --force readline
+      export CMAKE_PREFIX_PATH="/usr/local/opt/readline"
+
       export PATH="/use/local/opt/ccache/libexec:$PATH"
     fi
 
