@@ -1,11 +1,11 @@
 [submodule "rtt"]
 	path = rtt
 	url = ../rtt.git
-	branch = toolchain-2.9
+	branch = toolchain-2.10
 [submodule "ocl"]
 	path = ocl
 	url = ../ocl.git
-	branch = toolchain-2.9
+	branch = toolchain-2.10
 [submodule "orogen"]
 	path = orogen
 	url = ../orogen.git
@@ -13,7 +13,7 @@
 [submodule "typelib"]
 	path = typelib
 	url = ../typelib.git
-	branch = toolchain-2.9
+	branch = master
 [submodule "utilrb"]
 	path = utilrb
 	url = ../utilrb.git
@@ -21,7 +21,7 @@
 [submodule "log4cpp"]
 	path = log4cpp
 	url = ../log4cpp.git
-	branch = toolchain-2.9
+	branch = toolchain-2.10
 [submodule "rtt_typelib"]
 	path = rtt_typelib
 	url = ../rtt_typelib.git
